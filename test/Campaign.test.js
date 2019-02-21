@@ -103,6 +103,8 @@ describe('Campaigns', () => {
         let balance = await web3.eth.getBalance(accounts[1]);
         balance = web3.utils.fromWei(balance, 'ether');
         balance = parseFloat(balance);
+
+        //We are not sure the exact balance of account 1 because ganache doesn clean at the end of each run
         console.log(balance);
         assert(balance > 104);
     });
