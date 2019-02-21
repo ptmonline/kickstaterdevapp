@@ -1,0 +1,26 @@
+{
+  "name": "kickstaterdevapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ptmonline/kickstaterdevapp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ptmonline/kickstaterdevapp/issues"
+  },
+  "homepage": "https://github.com/ptmonline/kickstaterdevapp#readme",
+  "dependencies": {
+    "fs-extra": "^7.0.1",
+    "ganache-cli": "^6.3.0",
+    "mocha": "^6.0.0",
+    "solc": "^0.5.4",
+    "web3": "^1.0.0-beta.35"
+  }
+}
