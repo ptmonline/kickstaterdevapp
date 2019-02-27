@@ -30,7 +30,7 @@ contract Campaign {
     uint public approversCount;
     
     modifier restricted(){
-        require(msg.sender == manager);
+        require(msg.sender == manager, "error message");
         _;
     }
     
@@ -40,7 +40,7 @@ contract Campaign {
     }
     
     function contribute() public payable{
-        require(msg.value > minimumContribution);
+        require(msg.value > minimumContribution, "error message");
         approvers[msg.sender] = true;
         approversCount++;
     }
@@ -60,8 +60,8 @@ contract Campaign {
     function approveRequest(uint index) public {
         Request storage request = requests[index];
         
-        require(approvers[msg.sender]);
-        require(!request.approvals[msg.sender]);
+        require(approvers[msg.sender], "error message");
+        require(!request.approvals[msg.sender], "error message");
         
         request.approvals[msg.sender] = true;
         request.approvalCount++;
@@ -69,10 +69,24 @@ contract Campaign {
     
     function finalizeRequest(uint index) public restricted{
         Request storage request = requests[index];
-        require(approversCount > (request.approvalCount / 2));
-        require(!request.complete);
+        require(approversCount > (request.approvalCount / 2), "error message");
+        require(!request.complete, "error message");
         
         request.recipient.transfer(request.value);
         request.complete = true;
+    }
+
+    function getSummary() public view returns(uint, uint, uint, uint, address) {
+        return (
+            minimumContribution,
+            this.balance,
+            requests.length,
+            approversCount,
+            manager
+        );
+    }
+
+    function getRequestsCount() public view returns(uint){
+        return requests.length;
     }
 }
